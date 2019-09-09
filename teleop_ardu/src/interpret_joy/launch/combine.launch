@@ -1,0 +1,24 @@
+<launch>
+ <!-- Turtlesim Node-->
+  <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+
+ <!-- joy node -->
+  <node respawn="true" pkg="joy"
+        type="joy_node" name="turtle_joy" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="1.0" />
+  </node>
+
+ <!-- Axes -->
+  <param name="left_axis_forward_x" value="-9" type="int"/>  <!-- 4 -->
+  <param name="left_axis_forward_z" value="-9" type="int"/>  <!-- 1 -->
+
+  <param name="right_axis_forward_x" value="1" type="int"/> <!-- 0 -->
+  <param name="right_axis_forward_z" value="0" type="int"/> <!-- 5 -->
+
+  <node pkg="interpret_joy" type="readin" name="readjoy"/>
+
+  <!-- Simple Drive Node -->
+  <include file="$(find simple_drive)/launch/simple_drive.launch"/>
+
+</launch>
